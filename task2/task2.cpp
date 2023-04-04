@@ -5,8 +5,6 @@ using namespace std;
 const int ROWS = 3;
 const int COLS = 4;
 
-int Factorial(const int factorial);
-
 void FillRand(int arr[], const int n, int minRand = 0, int maxRand = 9);
 void FillRand(double arr[], const int n);
 void FillRand(char arr[], const int n, int minRand = 0, int maxRand = 100);
@@ -92,14 +90,6 @@ int main()
 	system("chcp 65001");
 	setlocale(LC_ALL, "");
 #ifdef ARRAYS_1
-		//--------------------------------------------------------------------------------
-		// Проверка факториал
-
-		//int factorial;
-		//cout << "Введите число возводимое в факториал: ";
-		//cin >> factorial;
-		//cout << "Факторила числа " << factorial << " равен: " << Factorial(factorial) << endl;
-
 		//--------------------------------------------------------------------------------
 		// Массивы
 	//const int n = 10;
@@ -210,16 +200,6 @@ int main()
 
 	//cout << "Подсчет кол-ва повторений в массиве" << endl;
 	Search(i_arr_2, ROWS, COLS);
-}
-
-int Factorial(const int factorial)
-{
-	int total = 1;
-	for (int i = 1; i <= factorial; i++)
-	{
-		total *= i;
-	}
-	return total;
 }
 
 void FillRand(int arr[], const int n, int minRand, int maxRand)
