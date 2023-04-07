@@ -1,22 +1,28 @@
 ﻿#include<iostream>
 using namespace std;
-//
+
+const int ROWS = 3;
+const int COLS = 4;
+
 
 void FillRand(int arr[], const int n);
+void FillRand(int arr[ROWS][COLS], const int ROWS, const int COLS);
 void FillRand(double arr[], const int n);
 
-void Print(const int arr[], const int n);
-void Print(const double arr[], const int n);
+template <class T> void Print(const T arr[], const int n);
+template <typename T> void Print(T arr[ROWS][COLS], const int ROWS, const int COLS);
 
-int Sum(const int arr[], const int n);
-double Avg(const int arr[], const int n);
-int minValueIn(const int arr[], const int n);
-int maxValueIn(const int arr[], const int n);
+template <typename T> T Sum(const T arr[], const int n);
 
-void Sort(int arr[], const int n);
+template <typename T> double Avg(const T arr[], const int n);
 
-void shiftLeft(int arr[], const int n, int number_of_shifts);
-void shiftRight(int arr[], const int n, int number_of_shifts);
+template <typename T> T minValueIn(const T arr[], const int n);
+template <typename T> T maxValueIn(const T arr[], const int n);
+
+template <typename T> void Sort(T arr[], const int n);
+
+template <typename T> void shiftLeft(T arr[], const int n, int number_of_shifts);
+template <typename T> void shiftRight(T arr[], const int n, int number_of_shifts);
 
 void main()
 {
@@ -29,22 +35,42 @@ void main()
 	cout << "Среднее арифметическое элементов массива: " << Avg(arr, n) << endl;
 	cout << "Минимальное значение в массиве:  " << minValueIn(arr, n) << endl;
 	cout << "Максимальное значение в массиве: " << maxValueIn(arr, n) << endl;
+	cout << "Сортируем массив: " << endl;
 	Sort(arr, n);
 	Print(arr, n);
 
-	/*int number_of_shifts;
-	cout << "Введите количество сдвигов: "; cin >> number_of_shifts;
-	shiftLeft(arr, n, number_of_shifts);
-	Print(arr, n);
-	shiftRight(arr, n, number_of_shifts);
-	Print(arr, n);*/
+	//int number_of_shifts;
+	//cout << "Введите количество сдвигов: "; cin >> number_of_shifts;
+	//shiftLeft(arr, n, number_of_shifts);
+	//Print(arr, n);
+	//shiftRight(arr, n, number_of_shifts);
+	//Print(arr, n);
 
 	const int SIZE = 8;
 	double d_arr[SIZE];
 	FillRand(d_arr, SIZE);
 	Print(d_arr, SIZE);
+	cout << "сумма элементов: " << Sum(d_arr, SIZE) << endl;
+	cout << "среднее арифметическое элемнтов массива: " << Avg(d_arr, SIZE) << endl;
+	Print(d_arr, SIZE);
+	cout << "Минимальное значение в массиве:  " << minValueIn(d_arr, SIZE) << endl;
+	cout << "Максимальное значение в массиве: " << maxValueIn(d_arr, SIZE) << endl;
+	Sort(d_arr, SIZE);
+	Print(d_arr, SIZE);
+	cout << endl;
+	int number_of_shifts;
+	cout << "Введите количество сдвигов: "; cin >> number_of_shifts;
+	shiftLeft(d_arr, SIZE, number_of_shifts);
+	Print(d_arr, SIZE);
+	shiftRight(d_arr, SIZE, number_of_shifts);
+	Print(d_arr, SIZE);
 
-}
+	cout << endl;
+	int i_arr_2[ROWS][COLS];
+	FillRand(i_arr_2, ROWS, COLS);
+	cout << "Массив 2-у мерный" << endl;
+	Print(i_arr_2, ROWS, COLS);
+}	
 void FillRand(int arr[], const int n)
 {
 	//rand();	//возвращает псевдослучайное число в диапазоне от 0 до 32 767 (MAX_RAND)
@@ -63,51 +89,64 @@ void FillRand(double arr[], const int n)
 	}
 }
 
-void Print(const int arr[], const int n)
+void FillRand(int arr[ROWS][COLS], const int ROWS, const int COLS)
 {
-	//Вывод массива на экран:
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < ROWS; i++)
 	{
-		cout << arr[i] << "\t";
+		for (int j = 0; j < COLS; j++)
+		{
+			arr[i][j] = rand() % 100;
+		}
 	}
-	cout << endl;
 }
-void Print(const double arr[], const int n)
+template <class T> void Print(const T arr[], const int n)
 {
 	//Вывод массива на экран:
 	for (int i = 0; i < n; i++)
 	{
-		cout << arr[i] << "\t";
+		cout << arr[i] << " ";
 	}
 	cout << endl;
 }
 
-int Sum(const int arr[], const int n)
+template <typename T> void Print(T arr[ROWS][COLS], const int ROWS, const int COLS)
+{
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			cout << arr[i][j] << " ";
+		}
+		cout << endl;
+	}
+	cout << endl;
+}
+
+template <typename T> T Sum(const T arr[], const int n)
 {
 	//Вычисление суммы элементов массива:
-	int sum = 0;
+	T sum = 0;
 	for (int i = 0; i < n; i++)
 	{
 		sum += arr[i];
 	}
 	return sum;
 }
-double Avg(const int arr[], const int n)
+template <typename T> double Avg(const T arr[], const int n)
 {
 	return (double)Sum(arr, n) / n;
 }
-int minValueIn(const int arr[], const int n)
+template <typename T> T minValueIn(const T arr[], const int n)
 {
-	int min = arr[0];
+	T min = arr[0];
 	for (int i = 0; i < n; i++)
 	{
 		if (arr[i] < min)min = arr[i];
 	}
 	return min;
-}
-int maxValueIn(const int arr[], const int n)
+}template <typename T> T maxValueIn(const T arr[], const int n)
 {
-	int max = arr[0];
+	T max = arr[0];
 	for (int i = 0; i < n; i++)
 	{
 		if (arr[i] > max)max = arr[i];
@@ -115,7 +154,7 @@ int maxValueIn(const int arr[], const int n)
 	return max;
 }
 
-void Sort(int arr[], const int n)
+template <typename T> void Sort(T arr[], const int n)
 {
 	for (int i = 0; i < n; i++)
 	{
@@ -127,19 +166,19 @@ void Sort(int arr[], const int n)
 			//arr[j] - перебираемый элемент
 			if (arr[j] < arr[i])
 			{
-				arr[i] ^= arr[j];
-				arr[j] ^= arr[i];
-				arr[i] ^= arr[j];
+				T buffer = arr[i];
+				arr[i] = arr[j];
+				arr[j] = buffer;
 			}
 		}
 	}
 }
 
-void shiftLeft(int arr[], const int n, int number_of_shifts)
+template <typename T> void shiftLeft(T arr[], const int n, int number_of_shifts)
 {
 	for (int i = 0; i < number_of_shifts; i++)
 	{
-		int buffer = arr[0];
+		T buffer = arr[0];
 		for (int i = 0; i < n; i++)
 		{
 			arr[i] = arr[i + 1];
@@ -147,17 +186,17 @@ void shiftLeft(int arr[], const int n, int number_of_shifts)
 		arr[n - 1] = buffer;
 	}
 }
-void shiftRight(int arr[], const int n, int number_of_shifts)
+template <typename T> void shiftRight(T arr[], const int n, int number_of_shifts)
 {
-	/*for (int i = 0; i < number_of_shifts; i++)
+	for (int i = 0; i < number_of_shifts; i++)
 	{
-		int buffer = arr[n - 1];
+		T buffer = arr[n - 1];
 		for (int i = n - 1; i > 0; i--)
 		{
 			arr[i] = arr[i - 1];
 		}
 		arr[0] = buffer;
-	}*/
+	}
 
-	shiftLeft(arr, n, n - number_of_shifts);
+	//shiftLeft(arr, n, n - number_of_shifts);
 }
