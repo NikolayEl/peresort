@@ -129,6 +129,10 @@
   <ItemGroup>
     <ClCompile Include="task2.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="HeaderFiles\constants.h" />
+    <ClInclude Include="HeaderFiles\stdafx.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
